@@ -1,4 +1,7 @@
 import React from 'react';
+import YouTube from 'react-youtube';
+
+import VideoListItem from './VideoListItem';
 
 class App extends React.Component {
   state = { data: [] };
@@ -28,6 +31,12 @@ class App extends React.Component {
           <input type="text" name="search" className="search" />
           <button>Buscar</button>
         </form>
+
+        <div className="VideoList">
+          {this.state.data.map(video => (
+            <VideoListItem key={video.id.videoId || video.id.playlistId} video={video} />
+          ))}
+        </div>
       </div>
     );
   }
