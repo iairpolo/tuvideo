@@ -1,15 +1,19 @@
 import React from 'react';
+import he from 'he';
 
-function VideoListItem(props) {
-  const { video } = props;
-
-  return (
-    <div className="VideoListItem">
-      <img src={video.snippet.thumbnails.medium.url} alt={video.snippet.title} />
-      <h3>{video.snippet.title}</h3>
-      <p>{video.snippet.description}</p>
-    </div>
-  );
+class VideoListItem extends React.Component {
+  render() {
+    return (
+      <div className="VideoListItem">
+        <img
+          src={this.props.video.snippet.thumbnails.medium.url}
+          alt={he.decode(this.props.video.snippet.title)}
+        />
+        <h3>{he.decode(this.props.video.snippet.title)}</h3>
+        <p>{this.props.video.snippet.description}</p>
+      </div>
+    );
+  }
 }
 
 export default VideoListItem;

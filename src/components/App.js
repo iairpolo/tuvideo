@@ -1,10 +1,14 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-import VideoListItem from './VideoListItem';
+import VideoList from './VideoList';
 
 class App extends React.Component {
-  state = { data: [] };
+  state = {
+    loading: false,
+    error: null,
+    data: []
+  };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -13,14 +17,17 @@ class App extends React.Component {
     const API_URL = 'https://www.googleapis.com/youtube/v3/search?';
     const MAX_RESULTS = 20;
 
+    this.setState({ loading: true, error: null });
+
     fetch(
-      `${API_URL}part=snippet&q=${e.target.search.value}&maxResults=${MAX_RESULTS}&key=${API_KEY}`
+      `${API_URL}part=snippet&q=${
+        e.target.search.value
+      }&maxResults=${MAX_RESULTS}&type=video&key=${API_KEY}`
     )
       .then(response => response.json())
-      .then(response => this.setState({ data: response.items }))
+      .then(response => this.setState({ loading: false, data: response.items }))
       .catch(error => {
-        let fetchError = new Error('Algo ha fallado en la conexión con el servidor');
-        console.log(error);
+        this.setState({ loading: false, error: error });
       });
   };
 
@@ -32,11 +39,7 @@ class App extends React.Component {
           <button>Buscar</button>
         </form>
 
-        <div className="VideoList">
-          {this.state.data.map(video => (
-            <VideoListItem key={video.id.videoId || video.id.playlistId} video={video} />
-          ))}
-        </div>
+        <VideoList videos={this.state.data} loading={this.state.loading} error={this.state.error} />
       </div>
     );
   }
