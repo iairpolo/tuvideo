@@ -4,9 +4,7 @@ import VideoListItem from './VideoListItem';
 
 class VideoList extends React.Component {
   render() {
-    if (this.props.loading) {
-      return 'Cargando...';
-    } else if (this.props.error) {
+    if (this.props.error) {
       console.log(this.props.error);
       return 'Error: algo ha fallado en la conexión con el servidor';
     } else if (!this.props.videos) {
