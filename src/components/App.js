@@ -1,6 +1,6 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Header, Input, Button, Loader } from 'semantic-ui-react';
+import { Container, Header, Input, Button, Divider, Loader } from 'semantic-ui-react';
 import './styles/App.css';
 import YouTube from 'react-youtube';
 
@@ -68,7 +68,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header dividing textAlign="center">
+        <Header textAlign="center">
           <form onSubmit={this.handleSubmit}>
             <Input
               focus
@@ -82,20 +82,23 @@ class App extends React.Component {
             {/* <Button primary>Buscar</Button> */}
           </form>
         </Header>
-
+        <Divider />
         <main>
-          <VideoList videos={this.state.data.videos} error={this.state.error} />
-
-          {this.state.loading && (
-            <Loader active inline="centered" size="large">
-              Buscando...
-            </Loader>
-          )}
-          {this.state.data.nextPageToken && (
-            <Button primary onClick={this.handleClick}>
-              Cargar más resultados
-            </Button>
-          )}
+          <Container>
+            <VideoList videos={this.state.data.videos} error={this.state.error} />
+          </Container>
+          <Container textAlign="center" className="adicionales">
+            {this.state.loading && (
+              <Loader active inline="centered" size="large">
+                Buscando...
+              </Loader>
+            )}
+            {this.state.data.nextPageToken && (
+              <Button size="big" primary onClick={this.handleClick}>
+                Cargar más resultados
+              </Button>
+            )}
+          </Container>
         </main>
       </React.Fragment>
     );

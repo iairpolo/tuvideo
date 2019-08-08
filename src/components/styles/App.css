@@ -1,3 +1,7 @@
-.header {
-  padding: 10px;
+.ui.header {
+  padding: 20px 0 5px;
+}
+
+.adicionales {
+  margin: 20px 0;
 }

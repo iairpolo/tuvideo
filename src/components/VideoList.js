@@ -12,7 +12,7 @@ class VideoList extends React.Component {
       return 'Nada encontrado';
     }
     return (
-      <Card.Group itemsPerRow={4}>
+      <Card.Group itemsPerRow={3}>
         {this.props.videos.map(video => (
           <VideoListItem key={video.id.videoId} video={video} />
         ))}
