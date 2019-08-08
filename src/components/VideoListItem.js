@@ -1,6 +1,6 @@
 import React from 'react';
 import he from 'he';
-
+import './styles/VideoListItem.css';
 import { Card, Image } from 'semantic-ui-react';
 
 class VideoListItem extends React.Component {
@@ -15,7 +15,7 @@ class VideoListItem extends React.Component {
         />
         <Card.Content>
           <Card.Header>{he.decode(this.props.video.snippet.title)}</Card.Header>
-          <Card.Meta>{this.props.video.snippet.description}</Card.Meta>
+          <Card.Description>{this.props.video.snippet.description}</Card.Description>
         </Card.Content>
       </Card>
     );

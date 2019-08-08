@@ -1,7 +1,18 @@
 .ui.header {
-  padding: 20px 0 5px;
+  padding: 20px 10px 5px;
 }
 
-.adicionales {
+.ui.container.complement {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstTitle {
+  color: #888888;
+}
+
+.searchMore {
   margin: 20px 0;
 }

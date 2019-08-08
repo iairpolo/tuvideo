@@ -1,6 +1,6 @@
 import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Container, Header, Input, Button, Divider, Loader } from 'semantic-ui-react';
+import { Container, Header, Form, Input, Button, Divider, Loader } from 'semantic-ui-react';
 import './styles/App.css';
 import YouTube from 'react-youtube';
 
@@ -11,6 +11,7 @@ class App extends React.Component {
     loading: false,
     error: null,
     searchValue: '',
+    lastSearch: '',
     data: {
       videos: [],
       nextPageToken: '',
@@ -19,7 +20,7 @@ class App extends React.Component {
     }
   };
 
-  fetchVideos = e => {
+  fetchVideos = () => {
     const API_KEY = process.env.REACT_APP_YT_API_KEY;
     const API_URL = 'https://www.googleapis.com/youtube/v3/search?';
     const MAX_RESULTS = 20;
@@ -28,7 +29,7 @@ class App extends React.Component {
 
     fetch(
       `${API_URL}part=snippet&q=${
-        this.state.searchValue
+        this.state.lastSearch
       }&maxResults=${MAX_RESULTS}&type=video&key=${API_KEY}${
         this.state.data.nextPageToken ? `&pageToken=${this.state.data.nextPageToken}` : ''
       }`
@@ -56,12 +57,13 @@ class App extends React.Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    this.fetchVideos(e);
-  };
-
-  handleClick = () => {
+    // Obliga a detener el codigo hasta que termina de modificarse el state:
+    await this.setState({
+      lastSearch: this.state.searchValue,
+      data: { videos: [], nextPageToken: '' }
+    });
     this.fetchVideos();
   };
 
@@ -69,32 +71,35 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header textAlign="center">
-          <form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <Input
               focus
               action={{ color: 'blue', content: 'Buscar' }}
               placeholder="Búsqueda..."
               type="text"
-              name="search"
               onChange={this.handleChange}
               value={this.state.searchValue}
             />
-            {/* <Button primary>Buscar</Button> */}
-          </form>
+          </Form>
         </Header>
         <Divider />
         <main>
-          <Container>
+          <Container fluid>
             <VideoList videos={this.state.data.videos} error={this.state.error} />
           </Container>
-          <Container textAlign="center" className="adicionales">
+          {!this.state.lastSearch && (
+            <Container className="complement">
+              {!this.state.lastSearch && <h1 className="firstTitle">Busca un video</h1>}
+            </Container>
+          )}
+          <Container textAlign="center" className="searchMore">
             {this.state.loading && (
               <Loader active inline="centered" size="large">
                 Buscando...
               </Loader>
             )}
             {this.state.data.nextPageToken && (
-              <Button size="big" primary onClick={this.handleClick}>
+              <Button size="big" primary onClick={this.fetchVideos}>
                 Cargar más resultados
               </Button>
             )}
