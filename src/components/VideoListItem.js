@@ -1,17 +1,23 @@
 import React from 'react';
 import he from 'he';
 
+import { Card, Image } from 'semantic-ui-react';
+
 class VideoListItem extends React.Component {
   render() {
     return (
-      <div className="VideoListItem">
-        <img
+      <Card>
+        <Image
           src={this.props.video.snippet.thumbnails.medium.url}
           alt={he.decode(this.props.video.snippet.title)}
+          wrapped
+          ui={false}
         />
-        <h3>{he.decode(this.props.video.snippet.title)}</h3>
-        <p>{this.props.video.snippet.description}</p>
-      </div>
+        <Card.Content>
+          <Card.Header>{he.decode(this.props.video.snippet.title)}</Card.Header>
+          <Card.Meta>{this.props.video.snippet.description}</Card.Meta>
+        </Card.Content>
+      </Card>
     );
   }
 }

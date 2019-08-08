@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'semantic-ui-react';
 
 import VideoListItem from './VideoListItem';
 
@@ -11,11 +12,11 @@ class VideoList extends React.Component {
       return 'Nada encontrado';
     }
     return (
-      <div className="VideoList">
+      <Card.Group itemsPerRow={4}>
         {this.props.videos.map(video => (
           <VideoListItem key={video.id.videoId} video={video} />
         ))}
-      </div>
+      </Card.Group>
     );
   }
 }

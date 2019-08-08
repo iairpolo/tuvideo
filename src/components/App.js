@@ -1,4 +1,7 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import { Header, Input, Button, Loader } from 'semantic-ui-react';
+import './styles/App.css';
 import YouTube from 'react-youtube';
 
 import VideoList from './VideoList';
@@ -65,27 +68,33 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <header>
+        <Header dividing textAlign="center">
           <form onSubmit={this.handleSubmit}>
-            <input
+            <Input
+              focus
+              action={{ color: 'blue', content: 'Buscar' }}
+              placeholder="Búsqueda..."
               type="text"
               name="search"
-              className="search"
               onChange={this.handleChange}
               value={this.state.searchValue}
             />
-            <button>Buscar</button>
+            {/* <Button primary>Buscar</Button> */}
           </form>
-        </header>
+        </Header>
 
         <main>
           <VideoList videos={this.state.data.videos} error={this.state.error} />
 
-          {this.state.loading && <div className="Loading">Cargando...</div>}
+          {this.state.loading && (
+            <Loader active inline="centered" size="large">
+              Buscando...
+            </Loader>
+          )}
           {this.state.data.nextPageToken && (
-            <button className="btn" onClick={this.handleClick}>
+            <Button primary onClick={this.handleClick}>
               Cargar más resultados
-            </button>
+            </Button>
           )}
         </main>
       </React.Fragment>
