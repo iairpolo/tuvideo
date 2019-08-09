@@ -59,6 +59,7 @@ class App extends React.Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    e.target.searchInp.blur();
     // Obliga a detener el codigo hasta que termina de modificarse el state:
     await this.setState({
       lastSearch: this.state.searchValue,
@@ -77,6 +78,7 @@ class App extends React.Component {
               autoFocus
               placeholder="Búsqueda..."
               type="text"
+              name="searchInp"
               onChange={this.handleChange}
               value={this.state.searchValue}
             />
