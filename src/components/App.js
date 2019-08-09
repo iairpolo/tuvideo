@@ -73,13 +73,14 @@ class App extends React.Component {
         <Header textAlign="center">
           <Form onSubmit={this.handleSubmit}>
             <Input
+              size="big"
               autoFocus
               placeholder="Búsqueda..."
               type="text"
               onChange={this.handleChange}
               value={this.state.searchValue}
             />
-            <Button primary className="searchBtn">
+            <Button size="big" primary className="searchBtn">
               Buscar
             </Button>
           </Form>
