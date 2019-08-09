@@ -2,6 +2,16 @@
   padding: 20px 10px 5px;
 }
 
+.ui.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button.searchBtn {
+  margin-left: 20px;
+}
+
 .ui.container.complement {
   height: 80vh;
   display: flex;

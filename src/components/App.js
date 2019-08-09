@@ -73,13 +73,15 @@ class App extends React.Component {
         <Header textAlign="center">
           <Form onSubmit={this.handleSubmit}>
             <Input
-              focus
-              action={{ color: 'blue', content: 'Buscar' }}
+              autoFocus
               placeholder="Búsqueda..."
               type="text"
               onChange={this.handleChange}
               value={this.state.searchValue}
             />
+            <Button primary className="searchBtn">
+              Buscar
+            </Button>
           </Form>
         </Header>
         <Divider />
