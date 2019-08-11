@@ -41,13 +41,13 @@ class App extends React.Component {
           data: {
             videos: [].concat(this.state.data.videos, response.items),
             nextPageToken: response.nextPageToken,
-            resultsPerPage: this.state.resultsPerPage + response.pageInfo.resultsPerPage,
+            resultsPerPage: this.state.data.resultsPerPage + MAX_RESULTS,
             totalResults: response.pageInfo.totalResults
           }
         })
       )
       .catch(error => {
-        this.setState({ loading: false, error: error });
+        this.setState({ loading: false, error });
       });
   };
 
@@ -94,7 +94,7 @@ class App extends React.Component {
           </Container>
           {!this.state.lastSearch && (
             <Container className="complement">
-              {!this.state.lastSearch && <h1 className="firstTitle">Busca un video</h1>}
+              {!this.state.lastSearch && <h1 className="firstTitle">¿Qué video quieres ver?</h1>}
             </Container>
           )}
           <Container textAlign="center" className="searchMore">
