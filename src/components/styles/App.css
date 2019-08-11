@@ -30,7 +30,7 @@
 footer {
   text-align: center;
   border-top: 1px solid rgba(34, 36, 38, 0.15);
-  padding: 10px 0;
+  padding: 10px 10px;
 }
 
 .fixedBottom {
