@@ -2,7 +2,6 @@ import React from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { Container, Header, Form, Input, Button, Divider, Loader } from 'semantic-ui-react';
 import './styles/App.css';
-import YouTube from 'react-youtube';
 
 import VideoList from './VideoList';
 import Footer from './Footer';
