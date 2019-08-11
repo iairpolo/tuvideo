@@ -26,3 +26,23 @@
 .searchMore {
   margin: 20px 0;
 }
+
+footer {
+  text-align: center;
+  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 10px 0;
+}
+
+.fixedBottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.rmvFixedBottom {
+  position: none;
+  bottom: none;
+  left: none;
+  right: none;
+}

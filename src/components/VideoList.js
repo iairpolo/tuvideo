@@ -4,13 +4,13 @@ import { Card } from 'semantic-ui-react';
 import VideoListItem from './VideoListItem';
 
 const VideoList = props => {
-  const { error, videos } = props;
+  const { error, videos, lastSearch, loading } = props;
 
   if (error) {
     console.log(error);
     return 'Error: algo ha fallado en la conexión con el servidor';
-  } else if (!videos) {
-    return 'Nada encontrado';
+  } else if (videos.length === 0 && lastSearch !== '' && !loading) {
+    return <h2>Nada encontrado</h2>;
   }
   return (
     <Card.Group centered>

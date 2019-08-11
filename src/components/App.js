@@ -5,6 +5,7 @@ import './styles/App.css';
 import YouTube from 'react-youtube';
 
 import VideoList from './VideoList';
+import Footer from './Footer';
 
 class App extends React.Component {
   state = {
@@ -90,7 +91,12 @@ class App extends React.Component {
         <Divider />
         <main>
           <Container fluid>
-            <VideoList videos={this.state.data.videos} error={this.state.error} />
+            <VideoList
+              videos={this.state.data.videos}
+              error={this.state.error}
+              lastSearch={this.state.lastSearch}
+              loading={this.state.loading}
+            />
           </Container>
           {!this.state.lastSearch && (
             <Container className="complement">
@@ -103,13 +109,14 @@ class App extends React.Component {
                 Buscando...
               </Loader>
             )}
-            {this.state.data.nextPageToken && (
+            {this.state.data.nextPageToken && !this.state.loading && (
               <Button size="big" primary onClick={this.fetchVideos}>
                 Cargar más resultados
               </Button>
             )}
           </Container>
         </main>
+        <Footer videos={this.state.data.videos} />
       </React.Fragment>
     );
   }
