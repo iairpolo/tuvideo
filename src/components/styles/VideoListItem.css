@@ -2,3 +2,7 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+
+.ui.modal {
+  background-color: black;
+}
